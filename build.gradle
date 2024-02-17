@@ -22,6 +22,8 @@ dependencies {
 
     implementation 'org.springframework.data:spring-data-jdbc'
     testImplementation 'com.h2database:h2'
+
+    implementation 'org.springdoc:springdoc-openapi-ui'
 }
 
 tasks.named('test') {
