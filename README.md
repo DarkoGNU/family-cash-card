@@ -2,6 +2,7 @@
 
 ![Build](https://github.com/DarkoGNU/family-cash-card/actions/workflows/gradle.yml/badge.svg)
 ![SAST](https://github.com/DarkoGNU/family-cash-card/actions/workflows/codeql.yml/badge.svg)
+![DAST](https://github.com/DarkoGNU/family-cash-card/actions/workflows/stackhawk.yml/badge.svg)
 
 CI/CD Pipeline using GitHub Actions for the Family Cash Card API
 
@@ -11,3 +12,4 @@ Features:
 - SCA security analysis: Dependency Review, Dependabot
     - Dependency Review - on pull request
     - Dependabot - regular scanning (https://github.com/DarkoGNU/family-cash-card/security/dependabot)
+- StackHawk DAST Security Analysis
