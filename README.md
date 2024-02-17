@@ -9,7 +9,7 @@ CI/CD Pipeline using GitHub Actions for the Family Cash Card API
 
 See working app on:
 - API: [https://pipeline.darkognu.eu/cashcards](https://pipeline.darkognu.eu/cashcards)
-    - example login: sarah
+    - example login: sarah1
     - example password: abc123
 - API specification: [https://pipeline.darkognu.eu/swagger-ui.html](https://pipeline.darkognu.eu/swagger-ui.html)
 
