@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Start your service
-        run: ./gradlew bootRun &                  # ✏️ Update this to run your own service to be scanned
+        run: ./gradlew build && java -jar build/libs/cashcard-0.0.1-SNAPSHOT.jar & # ✏️ Update this to run your own service to be scanned
 
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
