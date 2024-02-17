@@ -1,0 +1,42 @@
+name: Deployment to VPS
+
+on:
+  push:
+    branches: [ "altmer" ]
+  pull_request:
+    branches: [ "altmer" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+
+    # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
+    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+
+    - name: Build with Gradle Wrapper
+      run: ./gradlew build
+
+    - name: Stop service on server
+      run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no pipeline@pipeline.darkognu.eu systemctl --user stop app
+
+    - name: Copy artifact to server
+      run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no build/libs/cashcard-0.0.1-SNAPSHOT.jar pipeline@pipeline.darkognu.eu:app/
+
+    - name: Start service on server
+      run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no pipeline@pipeline.darkognu.eu systemctl --user start app
