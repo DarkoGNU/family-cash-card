@@ -9,3 +9,5 @@ Features:
 - Java CI with Gradle (includes unit testing)
 - CodeQL SAST security analysis
 - SCA security analysis: Dependency Review, Dependabot
+    - Dependency Review - on pull request
+    - Dependabot - regular scanning (https://github.com/DarkoGNU/family-cash-card/security/dependabot)
