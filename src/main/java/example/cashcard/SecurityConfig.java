@@ -1,5 +1,3 @@
-package example.cashcard;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -18,9 +16,10 @@ class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // Permit access to springdoc-openapi-ui endpoints without authentication
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/cashcards/**")
-                        .hasRole("CARD-OWNER"))
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/cashcards/**").hasRole("CARD-OWNER"))
                 .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable());
         return http.build();
