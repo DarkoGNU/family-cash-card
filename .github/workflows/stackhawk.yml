@@ -50,10 +50,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Start your service
-        run: ./gradlew build && java -jar build/libs/cashcard-0.0.1-SNAPSHOT.jar & # ✏️ Update this to run your own service to be scanned
-
+        
+      - name: Build application
+        run: ./gradlew build
+        
+      - name: Start application
+        run: java -jar build/libs/cashcard-0.0.1-SNAPSHOT.jar & # ✏️ Update this to run your own service to be scanned
+        
       - name: Run HawkScan
         uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
         continue-on-error: true                   # ✏️ Set to false to break your build on scan errors
